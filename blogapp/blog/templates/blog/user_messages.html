@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .message-container {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .message {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 10px 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            position: relative;
+        }
+        .received {
+            justify-content: flex-start;
+        }
+        .sent {
+            justify-content: flex-end;
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .content {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            word-wrap: break-word;
+        }
+        .image {
+            margin-bottom: 10px;
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .file {
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: #f0ad4e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ user.username }}</h2>
+        
+        <div id="messageList">
+            {% for message in received_messages %}
+                <div class="message-container received" data-timestamp="{{ message.timestamp|date:'c' }}">
+                    <div class="message">
+                        <div class="timestamp">{{ message.timestamp }}</div>
+                        <div class="content">{{ message.content }}</div>
+                        {% if message.image %}
+                            <div class="image">
+                                <img src="{{ message.image.url }}" alt="Image">
+                            </div>
+                        {% endif %}
+                        {% if message.file %}
+                            <div class="file">
+                                <a href="{{ message.file.url }}" target="_blank">{{ message.file.name }}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            {% for message in sent_messages %}
+                <div class="message-container sent" data-timestamp="{{ message.timestamp|date:'c' }}">
+                    <div class="message">
+                        <div class="timestamp">{{ message.timestamp }}</div>
+                        <div class="content">{{ message.content }}</div>
+                        {% if message.image %}
+                            <div class="image">
+                                <img src="{{ message.image.url }}" alt="Image">
+                            </div>
+                        {% endif %}
+                        {% if message.file %}
+                            <div class="file">
+                                <a href="{{ message.file.url }}" target="_blank">{{ message.file.name }}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <button class="back-button" onclick="window.history.back();">
+        Geri Dön
+    </button>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const messageList = document.getElementById('messageList');
+            const messages = Array.from(messageList.getElementsByClassName('message-container'));
+
+            messages.sort((a, b) => {
+                return new Date(a.getAttribute('data-timestamp')) - new Date(b.getAttribute('data-timestamp'));
+            });
+
+            messages.forEach(message => {
+                messageList.appendChild(message);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

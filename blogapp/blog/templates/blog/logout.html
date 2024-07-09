@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+{% block title %}Çıkış yap{% endblock title %}
+{% block content %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">Çıkış yaptın</h5>
+        <br><hr><a href="{% url 'main' %}" class="btn btn-primary">Tekrar kayıt ol</a>
+        </div>
+    </div>
+
+
+{% endblock content %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İş İlanı Oluştur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #f0ad4e;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #f0ad4e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Yeni İş İlanı Oluştur</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="title">Başlık:</label><br>
+        {{ form.title }}<br>
+
+        <label for="description">Açıklama:</label><br>
+        {{ form.description }}<br>
+
+        <label for="requirements">Gereksinimler:</label><br>
+        {{ form.requirements }}<br>
+
+        <label for="location">Konum:</label><br>
+        {{ form.location }}<br>
+
+        <label for="salary">Maaş:</label><br>
+        {{ form.salary }}<br>
+
+        <label for="sector">Sektör:</label><br>
+        {{ form.sector }}<br>
+
+        <input type="submit" value="Oluştur">
+    </form>
+</body>
+</html>
+
+
+

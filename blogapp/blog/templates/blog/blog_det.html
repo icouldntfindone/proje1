@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Detayı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #f4f4f4;
+            padding-bottom: 10px;
+        }
+        .content {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+            word-wrap: break-word; 
+        }
+        .content p {
+            margin-bottom: 20px;
+        }
+        .content h2, .content h3, .content h4 {
+            color: #333;
+            margin-top: 30px;
+        }
+        .content ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .content ul li {
+            list-style-type: disc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ blog.title }}</h1>
+        <div class="content">
+            <p class="card-text">{{ blog.content|safe }}</p> 
+        </div>
+    </div>
+</body>
+</html>
+
+
+

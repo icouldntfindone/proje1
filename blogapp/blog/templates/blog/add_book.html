@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Form</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST" action="{% url 'add_book' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_title">Kitap Başlığı:</label>
+                    <input type="text" class="form-control" id="id_title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_author">Yazar:</label>
+                    <input type="text" class="form-control" id="id_author" name="author" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_pdf">Kitap PDF:</label>
+                    <input type="file" class="form-control-file" id="id_pdf" name="pdf" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_summary">Kitap Özeti:</label>
+                    <textarea class="form-control" id="id_summary" name="summary" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="id_user_review">Kullanıcı Yorumu:</label>
+                    <textarea class="form-control" id="id_user_review" name="user_review" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="id_rating">Puan (5 üzerinden):</label>
+                    <input type="number" class="form-control" id="id_rating" name="rating" min="0" max="5" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_cover_image">Kitap Kapak Resmi:</label>
+                    <input type="file" class="form-control-file" id="id_cover_image" name="cover_image">
+                </div>
+                <button type="submit" class="btn btn-primary">Ekle</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

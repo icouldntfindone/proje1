@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitap Arama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        #searchForm {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"],
+        input[type="button"] {
+            background-color: #f0ad4e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        input[type="submit"]:hover,
+        input[type="button"]:hover {
+            background-color: #f0ad4e;
+        }
+
+        #searchResults {
+            margin-top: 20px;
+        }
+
+        #searchResults ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #searchResults li {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 16px; 
+            font-weight: bold; 
+        }
+
+        #searchResults hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<form action="{% url 'search_books' %}" method="GET" id="searchForm" onsubmit="return checkInput()">
+    <label for="book_title">Kitap Başlığı Girin:</label><br>
+    <input type="text" id="book_title" name="book_title"><br>
+    <label for="author">Yazarı Girin:</label><br>
+    <input type="text" id="author" name="author"><br>
+    <input type="submit" value="Ara">
+    <input type="button" value="Temizle" onclick="clearForm()">
+</form>
+
+<div id="searchResults">
+    {% if books %}
+        <h2>Arama Sonuçları:</h2>
+        <ul>
+            {% for book in books %}
+                <li>
+                    <strong>Başlık:</strong> {{ book.title }}<br>
+                    <strong>Yazar:</strong> {{ book.author }}<br>
+                    <strong>Özet:</strong> {{ book.summary }}<br>
+                    <strong>Kullanıcı Yorumu:</strong> {{ book.user_review }}<br>
+                    <strong>Puan:</strong> {{ book.rating }}<br>
+                    <strong>PDF:</strong> <a href="{{ book.pdf.url }}" style="color: #f0ad4e;">PDF İndir</a><br>
+                    <strong>Kapak Resmi:</strong> <img src="{{ book.cover_image.png }}" alt="Kapak Resmi"><br>
+                    
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+<script>
+    function clearForm() {
+        document.getElementById("searchForm").reset(); 
+        document.getElementById("searchResults").innerHTML = ""; 
+    }
+
+    function checkInput() {
+    var title = document.getElementById("book_title").value;
+    var author = document.getElementById("author").value;
+    if (title.trim() === "" && author.trim() === "") {
+        alert("Lütfen bir kitap başlığı veya yazar adı girin.");
+        return false; 
+    } else if (title.trim() === "" && author.trim() !== "") {
+        
+        document.getElementById("book_title").setAttribute("disabled", true); 
+        return true; 
+    } else if (title.trim() !== "" && author.trim() === "") {
+        
+        document.getElementById("author").setAttribute("disabled", true); 
+        return true; 
+    } else {
+        
+        return true; 
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
